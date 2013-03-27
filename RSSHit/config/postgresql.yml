@@ -1,0 +1,24 @@
+Default: &defaults
+  user: RSSHit
+  password: RSSHit
+  host: localhost
+  port: 5432
+  database: RSSHit
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: RSSHit_test
+  <<: *defaults
+
+Staging:
+  database: RSSHit_staging
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: RSSHit_production
+  poolsize: 100
+  <<: *defaults
