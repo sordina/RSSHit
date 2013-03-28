@@ -32,6 +32,7 @@ rssToAtom (RSSModule.RSSItem   rTitle              -- :: Maybe String
                                rSource             -- :: Maybe RSSSource
                                rAttrs              -- :: [XML.Attr]
                                rOther              -- :: [XML.Element]
+
           ) = AtomModule.Entry eId                 -- :: String
                                eTitle              -- :: TextContent
                                eUpdated            -- :: Date  -- Just a string
@@ -48,28 +49,28 @@ rssToAtom (RSSModule.RSSItem   rTitle              -- :: Maybe String
                                eInReplyTotal       -- :: Maybe InReplyTotal
                                eAttrs              -- :: [XML.Attr]
                                eOther              -- :: [XML.Element]
-   where
-    eId           = fromMaybe "NoId" $ RSSModule.rssGuidValue <$> rGuid
-    eTitle        = AtomModule.HTMLString $ fromMaybe "NoTitle" rTitle
-    eUpdated      = fromMaybe "NoDate" rPubDate
-    eAuthors      = map (\a -> AtomModule.Person a Nothing Nothing []) (maybeToList rAuthor)
-    eCategories   = map (\a -> AtomModule.Category (RSSModule.rssCategoryValue a) Nothing Nothing []) rCategories
-    eContent      = AtomModule.HTMLContent <$> rDescription
-    eContributor  = []
-    eLinks        = (\l -> AtomModule.Link l Nothing Nothing Nothing Nothing Nothing [] []) <$> maybeToList rLink
-    ePublished    = rPubDate
-    eRights       = Nothing
-    eSource       = (\s -> AtomModule.Source [] [] Nothing Nothing Nothing
-                                             [AtomModule.Link (RSSModule.rssSourceURL s) Nothing Nothing Nothing Nothing Nothing [] []]
-                                             Nothing Nothing Nothing
-                                             (Just $ AtomModule.HTMLString $ RSSModule.rssSourceTitle s)
-                                             Nothing []
-                                             ) <$> rSource
-    eSummary      = Nothing
-    eInReplyTo    = Nothing
-    eInReplyTotal = Nothing
-    eAttrs        = rAttrs
-    eOther        = rOther
+
+   where eId           = fromMaybe "NoId" $ RSSModule.rssGuidValue <$> rGuid
+         eTitle        = AtomModule.HTMLString $ fromMaybe "NoTitle" rTitle
+         eUpdated      = fromMaybe "NoDate" rPubDate
+         eAuthors      = map (\a -> AtomModule.Person a Nothing Nothing []) (maybeToList rAuthor)
+         eCategories   = map (\a -> AtomModule.Category (RSSModule.rssCategoryValue a) Nothing Nothing []) rCategories
+         eContent      = AtomModule.HTMLContent <$> rDescription
+         eContributor  = []
+         eLinks        = (\l -> AtomModule.Link l Nothing Nothing Nothing Nothing Nothing [] []) <$> maybeToList rLink
+         ePublished    = rPubDate
+         eRights       = Nothing
+         eSource       = (\s -> AtomModule.Source [] [] Nothing Nothing Nothing
+                                                  [AtomModule.Link (RSSModule.rssSourceURL s) Nothing Nothing Nothing Nothing Nothing [] []]
+                                                  Nothing Nothing Nothing
+                                                  (Just $ AtomModule.HTMLString $ RSSModule.rssSourceTitle s)
+                                                  Nothing []
+                                                  ) <$> rSource
+         eSummary      = Nothing
+         eInReplyTo    = Nothing
+         eInReplyTotal = Nothing
+         eAttrs        = rAttrs
+         eOther        = rOther
 
 rss1ToAtom :: RSS1Module.Item -> AtomModule.Entry
 rss1ToAtom (RSS1Module.Item     iURI          -- :: URIString
