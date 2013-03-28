@@ -1,14 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Text.Feed.Import      (parseFeedString)
-import Text.Feed.Export      (xmlFeed)
+import Text.Feed.Import        (parseFeedString)
+import Text.Feed.Export        (xmlFeed)
+import Network.HTTP.Conduit    (simpleHttp)
+import Data.Text.Lazy.Encoding (encodeUtf8)
+import Data.ByteString.Lazy    (toStrict)
+import Data.ByteString.Char8   (unpack)
+import Text.XML.Light          (ppElement, add_attrs, Attr(..), attrKey, QName(..), qName, qURI, qPrefix, attrVal, Element)
+import RFC822                  (parse)
+import Conversion              (convert)
 import Text.Feed.Constructor
-import Network.HTTP.Conduit  (simpleHttp)
-import Data.ByteString.Lazy  (toStrict)
-import Data.ByteString.Char8 (unpack)
-import Text.XML.Light        (ppElement, add_attrs, Attr(..), attrKey, QName(..), qName, qURI, qPrefix, attrVal, Element)
-import RFC822                (parse)
-import Conversion            (convert)
 import Text.Feed.Types
 import Text.Feed.Query
 import Prelude
@@ -19,11 +20,10 @@ import Data.Ord
 import Data.Monoid
 import Conc
 import Web.Scotty
-import Data.Text.Lazy.Encoding (encodeUtf8)
 import qualified Data.Text.Lazy as L
 
 main :: IO ()
-main = do crap  <-  ppElement . addNamespaces . xmlFeed . createFeed . map convert . mergeRssItems
+main = do crap  <-  ppElement . addNamespaces . xmlFeed . setupFeed . createFeed . map convert . mergeRssItems
                 <$> getFeeds [ "rss/3am.rss"           -- "http://www.3ammagazine.com/3am/feed/"
                              , "rss/haskellforall.rss" -- "http://www.haskellforall.com/feeds/posts/default?alt=rss"
                              ]
@@ -58,3 +58,17 @@ addNamespaces = add_attrs [ Attr {attrKey = QName {qName = "dc",      qURI = Not
                           , Attr {attrKey = QName {qName = "atom",    qURI = Nothing, qPrefix = Just "xmlns"}, attrVal = "http://www.w3.org/2005/Atom"}
                           , Attr {attrKey = QName {qName = "thr",     qURI = Nothing, qPrefix = Just "xmlns"}, attrVal = "http://purl.org/syndication/thread/1.0"}
                           ]
+
+setupFeed :: Feed -> Feed
+setupFeed = withFeedTitle       "RSSHit!"
+          . withFeedLogoLink    "http://parkcloud.dynadot.com/logo.gif" "http://rsshit.com"
+          . withFeedGenerator   ("RSSHit!", Just "http://rsshit.com")
+          . withFeedDescription "RSSHit! A Really Simple Feed Agregator."
+          -- . withFeedLastUpdate  Last item change date
+          -- . withFeedHome        "http://rsshit.com"
+
+{-
+[*Main] λ withFeed
+withFeedCategories   withFeedDescription  withFeedHTML         withFeedItems        withFeedLastUpdate   withFeedPubDate
+withFeedDate         withFeedGenerator    withFeedHome         withFeedLanguage     withFeedLogoLink     withFeedTitle
+-}
