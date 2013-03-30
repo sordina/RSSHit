@@ -1,23 +1,28 @@
 -- | TODO: Sort some of these convertions out more completely
 --
-module Conversion (convert) where
+module Conversion (convertAtom) where
 
-import Text.Feed.Types
+import Text.Feed.Types hiding (Feed)
 import Text.Feed.Translate
 import Data.Maybe
 import Control.Applicative
 import Safe
+-- import Yesod.RssFeed as YesRSS
 
 import qualified Text.Atom.Feed   as AtomModule
 import qualified Text.RSS.Syntax  as RSSModule
 import qualified Text.RSS1.Syntax as RSS1Module
 
--- | Convert any feed type to Atom
-convert :: Item -> Item
-convert i@(AtomItem _x) = i
-convert   (RSSItem   x) = AtomItem $ rssToAtom  x
-convert   (RSS1Item  x) = AtomItem $ rss1ToAtom x
-convert i@(XMLItem  _x) = translateItemTo AtomKind i
+-- | Internal Yesod feed conversion
+-- convertYesod :: Item -> YesRSS.Feed a
+-- convertYesod = undefined
+
+-- | convertAtom any feed type to Atom
+convertAtom :: Item -> Item
+convertAtom i@(AtomItem _x) = i
+convertAtom   (RSSItem   x) = AtomItem $ rssToAtom  x
+convertAtom   (RSS1Item  x) = AtomItem $ rss1ToAtom x
+convertAtom i@(XMLItem  _x) = translateItemTo AtomKind i
 
 rssToAtom :: RSSModule.RSSItem -> AtomModule.Entry
 rssToAtom (RSSModule.RSSItem   rTitle              -- :: Maybe String

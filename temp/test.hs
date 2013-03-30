@@ -8,7 +8,7 @@ import Data.ByteString.Lazy    (toStrict)
 import Data.ByteString.Char8   (unpack)
 import Text.XML.Light          (ppElement, add_attrs, Attr(..), attrKey, QName(..), qName, qURI, qPrefix, attrVal, Element)
 import RFC822                  (parse)
-import Conversion              (convert)
+import Conversion              (convertAtom)
 import Text.Feed.Constructor
 import Text.Feed.Types
 import Text.Feed.Query
@@ -20,10 +20,20 @@ import Data.Ord
 import Data.Monoid
 import Conc
 import Web.Scotty
-import qualified Data.Text.Lazy as L
+import qualified Data.Text.Lazy  as L
+import qualified Text.Atom.Feed  as AtomModule
+import qualified Text.RSS.Syntax as RssSyntax
 
 main :: IO ()
-main = do crap  <-  ppElement . addNamespaces . xmlFeed . setupFeed . createFeed . map convert . mergeRssItems
+main = do crap  <-  ppElement
+                  . addNamespaces
+                  . xmlFeed
+                  . setupDate
+                  . setupFeed
+                  . createFeed
+                  . map convertAtom
+                  . mergeRssItems
+
                 <$> getFeeds [ "rss/3am.rss"           -- "http://www.3ammagazine.com/3am/feed/"
                              , "rss/haskellforall.rss" -- "http://www.haskellforall.com/feeds/posts/default?alt=rss"
                              ]
@@ -34,9 +44,6 @@ main = do crap  <-  ppElement . addNamespaces . xmlFeed . setupFeed . createFeed
 
 mergeRssItems :: [Feed] -> [Item]
 mergeRssItems = reverse . sortBy (comparing (fmap parse . getItemDate)) . concatMap getFeedItems
-
-headS :: Int -> String -> String
-headS n = unlines . take n . lines
 
 getRssHttp :: String -> IO (Maybe Feed)
 getRssHttp f = parseFeedString . unpack . toStrict <$> simpleHttp f
@@ -59,16 +66,18 @@ addNamespaces = add_attrs [ Attr {attrKey = QName {qName = "dc",      qURI = Not
                           , Attr {attrKey = QName {qName = "thr",     qURI = Nothing, qPrefix = Just "xmlns"}, attrVal = "http://purl.org/syndication/thread/1.0"}
                           ]
 
+setupDate :: Feed -> Feed
+setupDate f = case getDate f of Just d  -> withFeedLastUpdate d f
+                                Nothing -> f
+
+getDate :: Feed -> Maybe RssSyntax.DateString
+getDate f = listToMaybe (getFeedItems f) >>= foo
+  where
+    foo (AtomItem x) = Just $ AtomModule.entryUpdated x
+    foo _            = Nothing
+
 setupFeed :: Feed -> Feed
 setupFeed = withFeedTitle       "RSSHit!"
           . withFeedLogoLink    "http://parkcloud.dynadot.com/logo.gif" "http://rsshit.com"
           . withFeedGenerator   ("RSSHit!", Just "http://rsshit.com")
           . withFeedDescription "RSSHit! A Really Simple Feed Agregator."
-          -- . withFeedLastUpdate  Last item change date
-          -- . withFeedHome        "http://rsshit.com"
-
-{-
-[*Main] λ withFeed
-withFeedCategories   withFeedDescription  withFeedHTML         withFeedItems        withFeedLastUpdate   withFeedPubDate
-withFeedDate         withFeedGenerator    withFeedHome         withFeedLanguage     withFeedLogoLink     withFeedTitle
--}
