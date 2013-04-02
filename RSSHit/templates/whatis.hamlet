@@ -1,0 +1,11 @@
+<div class="whatis">
+  <h2> What is ^{name}?
+
+  <p> After the demise of Google Reader, it became clear that
+      \ reading and aggregation should be kept distinct.
+      \ RssHit provides the aggregation side of the equation.
+
+  <p> RssHit lets you subscribe to your favorite feeds, and
+      \ publishes the aggregated feeds as... another RSS feed!
+
+  <p> So meta!

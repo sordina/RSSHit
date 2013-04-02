@@ -17,6 +17,7 @@ library
                      Foundation
                      Import
                      Model
+                     Snippets
                      Settings
                      Settings.StaticFiles
                      Settings.Development
@@ -62,6 +63,7 @@ library
                  , persistent-template           >= 1.1.1      && < 1.2
                  , template-haskell
                  , hamlet                        >= 1.1        && < 1.2
+                 , shakespeare
                  , shakespeare-css               >= 1.0        && < 1.1
                  , shakespeare-js                >= 1.0.2      && < 1.2
                  , shakespeare-text              >= 1.0        && < 1.1

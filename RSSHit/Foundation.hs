@@ -20,6 +20,7 @@ import Web.ClientSession (getKey)
 import Text.Hamlet (hamletFile)
 import Yesod.Fay
 import System.Log.FastLogger (Logger)
+import Snippets
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -76,7 +77,7 @@ instance Yesod App where
 
     defaultLayout widget = do
         master <- getYesod
-        mmsg <- getMessage
+        mmsg   <- getMessage
 
         -- We break up the default layout into two components:
         -- default-layout is the contents of the body tag, and
@@ -85,9 +86,28 @@ instance Yesod App where
         -- you to use normal widget features in default-layout.
 
         pc <- widgetToPageContent $ do
+
+            aid <- lift maybeAuthId
+
             $(widgetFile "normalize")
-            addStylesheet $ StaticR css_bootstrap_css
+
+            addStylesheet $ StaticR flatui_css_bootstrap_css
+            addStylesheet $ StaticR flatui_css_flat_ui_css
+
+            addScript $ StaticR flatui_js_jquery_1_8_2_min_js
+            addScript $ StaticR flatui_js_jquery_ui_1_10_0_custom_min_js
+            addScript $ StaticR flatui_js_jquery_dropkick_1_0_0_js
+            addScript $ StaticR flatui_js_custom_checkbox_and_radio_js
+            addScript $ StaticR flatui_js_custom_radio_js
+            addScript $ StaticR flatui_js_jquery_tagsinput_js
+            addScript $ StaticR flatui_js_bootstrap_tooltip_js
+            addScript $ StaticR flatui_js_jquery_placeholder_js
+            addScript $ StaticR flatui_js_application_js
+
+            addScriptRemote $ "http://vjs.zencdn.net/c/video.js"
+
             $(widgetFile "default-layout")
+
         hamletToRepHtml $(hamletFile "templates/default-layout-wrapper.hamlet")
 
     -- This is done to provide an optimization for serving static files from

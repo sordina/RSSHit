@@ -1,0 +1,36 @@
+big {
+  font-size: 400%;
+  display: block;
+  line-height: 100%;
+  letter-spacing:0.2em;
+  padding: 0.5em;
+  font-variant:small-caps;
+}
+
+small {
+  display: block;
+}
+
+.login-items {
+  text-align: center;
+
+  h2 {
+    padding: 0 0 1em 0;
+    margin-top: 0;
+  }
+}
+
+.login-form {
+  width: 400px;
+  display: inline-block;
+  text-align: left;
+
+  input {
+    width: 100%;
+    font-size: 120%;
+  }
+}
+
+hr {
+  margin: 3em 0;
+}

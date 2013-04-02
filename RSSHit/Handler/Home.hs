@@ -3,6 +3,7 @@ module Handler.Home where
 
 import Import
 import Language.Haskell.TH ( Exp(..) )
+import Yesod.Auth
 
 -- This is a handler function for the GET request method on the HomeR
 -- resource pattern. All of your resource patterns are defined in
@@ -16,9 +17,10 @@ getHomeR = do
     (formWidget, formEnctype) <- generateFormPost sampleForm
     let submission = Nothing :: Maybe (FileInfo, Text)
         handlerName = "getHomeR" :: Text
+
     defaultLayout $ do
         aDomId <- lift newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "RssHit - Really Simple Shit"
         $(widgetFile "homepage")
         $(fayFile' (ConE 'StaticR) "Home")
 

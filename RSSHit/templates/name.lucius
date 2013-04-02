@@ -1,0 +1,45 @@
+.name {
+
+  line-height: 1em;
+  text-indent: 0;
+  text-align:  left;
+  display:     inline-block;
+  position:    relative;
+  top:         0.45em;
+  width:       4.7em;
+  height:      1.8em;
+  overflow:    hidden;
+
+  font-family: "Lato", sans-serif;
+  font-size:   1em;
+  font-weight: bold;
+
+  .word {
+    position: absolute;
+    left: 0.2em;
+    top:  0.3em;
+    font-variant:small-caps;
+    letter-spacing: 0.2em;
+    z-index: 10;
+  }
+
+  .leftbox {
+    border: 0.15em solid red;
+    position: absolute;
+    left: 0em;
+    top: 0.2em;
+    width: 2.15em;
+    height: 1.3em;
+    z-index: 1;
+  }
+
+  .rightbox {
+    border: 0.15em solid blue;
+    position: absolute;
+    left: 1.60em;
+    top: 0em;
+    width: 2.8em;
+    height: 1.3em;
+    z-index: 2;
+  }
+}
