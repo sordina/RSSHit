@@ -1,3 +1,7 @@
+h1 {
+    text-align: center
+}
+
 big {
   font-size: 400%;
   display: block;
@@ -5,6 +9,7 @@ big {
   letter-spacing:0.2em;
   padding: 0.5em;
   font-variant:small-caps;
+  padding: 0 0.5em 0.5em 0.5em !important;
 }
 
 small {
@@ -21,8 +26,6 @@ small {
 }
 
 .login-form {
-  width: 400px;
-  display: inline-block;
   text-align: left;
 
   input {

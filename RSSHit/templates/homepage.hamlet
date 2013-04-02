@@ -1,6 +1,8 @@
-<h2 class="exfeeds"> Example Feeds
+<div class="row">
+  <div class="span6 offset3">
+    <h2 class="exfeeds"> Example Feeds
 
-^{rssitem}
-^{rssitem}
-^{rssitem}
-^{rssitem}
+    ^{rssitem}
+    ^{rssitem}
+    ^{rssitem}
+    ^{rssitem}

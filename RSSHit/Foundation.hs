@@ -1,3 +1,6 @@
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE OverloadedStrings #-}
+
 module Foundation where
 
 import Prelude
@@ -21,6 +24,7 @@ import Text.Hamlet (hamletFile)
 import Yesod.Fay
 import System.Log.FastLogger (Logger)
 import Snippets
+import Data.Text
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application

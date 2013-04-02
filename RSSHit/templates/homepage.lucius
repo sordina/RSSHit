@@ -1,11 +1,3 @@
-h1 {
-    text-align: center
-}
-
-big {
-  padding: 0 0.5em 0.5em 0.5em !important;
-}
-
 h2##{aDomId} {
     color: #990
 }
@@ -16,4 +8,5 @@ h2##{aDomId} {
 
 .exfeeds {
   padding-bottom: 1em;
+  text-align: center;
 }

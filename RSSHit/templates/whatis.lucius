@@ -1,8 +1,3 @@
 .whatis {
-  display: inline-block;
-  width: 400px;
   text-align: justify;
-  padding-right: 3em;
-  vertical-align: top;
-
 }

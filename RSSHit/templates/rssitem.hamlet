@@ -1,4 +1,5 @@
 <p class="rssitem">
   <a href="#">
+    <!-- <img src=@ {StaticR img_rsslogo_png} alt="RSS Logo"> -->
     <img src="/static/img/rsslogo.png" alt="RSS Logo">
     Hacker News (news.ycombinator.com)
