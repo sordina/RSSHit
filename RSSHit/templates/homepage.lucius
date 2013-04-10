@@ -10,3 +10,7 @@ h2##{aDomId} {
   padding-bottom: 1em;
   text-align: center;
 }
+
+.feedadder * {
+  vertical-align: middle;
+}

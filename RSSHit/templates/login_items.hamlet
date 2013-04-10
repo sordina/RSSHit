@@ -1,0 +1,12 @@
+<div class="row login-items">
+  <div class="span6">
+      ^{whatis}
+
+  <div class="span6">
+    <div class="login-form">
+
+      <h2> Login to ^{name}
+
+      <a id="main_login_button" class="btn btn-primary btn-large btn-block" href="#">Login</a>
+
+<hr />

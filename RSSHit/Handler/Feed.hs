@@ -3,22 +3,17 @@
 module Handler.Feed where
 
 import Import
-import Language.Haskell.TH ( Exp(..) )
-import Yesod.Auth
-import Yesod.Persist
-import Data.Text
 
+maybe404 :: Maybe x -> GHandler sub0 master0 x
 maybe404 Nothing   = notFound
 maybe404  (Just x) = return x
 
 getFeedR :: Text -> Handler RepHtml
 getFeedR uName = do
 
-  u  <- runDB    $ getBy404      $ UniqueUser uName
-  let uI = entityKey u
-  uF <- runDB    $ selectList    [FeedUser ==. uI] []
+  u  <- runDB    $ getBy404   $ UniqueUser uName
+  uF <- runDB    $ selectList [FeedUser ==. entityKey u] []
 
-  liftIO $ print "User:"
   liftIO $ print u
   liftIO $ print uF
 

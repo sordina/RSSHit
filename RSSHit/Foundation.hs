@@ -25,6 +25,9 @@ import Yesod.Fay
 import System.Log.FastLogger (Logger)
 import Snippets
 import Data.Text
+import Network.Wai
+import Data.Monoid (mappend)
+import Data.Maybe (isNothing, isJust)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -71,6 +74,15 @@ type Form x = Html -> MForm App App (FormResult x, Widget)
 instance Yesod App where
     approot = ApprootMaster $ appRoot . settings
 
+    errorHandler NotFound = do
+      r <- waiRequest
+      let path' = mappend "/" $ Data.Text.intercalate "/" $ pathInfo r
+      fmap chooseRep $ defaultLayout $ do
+        setTitle "RssHit! - Not Found"
+        $(widgetFile "notfound")
+
+    errorHandler other = defaultErrorHandler other
+
     -- Store session data on the client in encrypted cookies,
     -- default session idle timeout is 120 minutes
     makeSessionBackend _ = do
@@ -82,6 +94,7 @@ instance Yesod App where
     defaultLayout widget = do
         master <- getYesod
         mmsg   <- getMessage
+        croute <- getCurrentRoute
 
         -- We break up the default layout into two components:
         -- default-layout is the contents of the body tag, and
@@ -98,6 +111,8 @@ instance Yesod App where
             addStylesheet $ StaticR flatui_css_bootstrap_css
             addStylesheet $ StaticR flatui_css_flat_ui_css
 
+            addStylesheetRemote "http://fonts.googleapis.com/css?family=Clicker+Script"
+
             addScript $ StaticR flatui_js_jquery_1_8_2_min_js
             addScript $ StaticR flatui_js_jquery_ui_1_10_0_custom_min_js
             addScript $ StaticR flatui_js_jquery_dropkick_1_0_0_js
@@ -108,7 +123,7 @@ instance Yesod App where
             addScript $ StaticR flatui_js_jquery_placeholder_js
             addScript $ StaticR flatui_js_application_js
 
-            addScriptRemote $ "http://vjs.zencdn.net/c/video.js"
+            addScriptRemote "https://login.persona.org/include.js"
 
             $(widgetFile "default-layout")
 

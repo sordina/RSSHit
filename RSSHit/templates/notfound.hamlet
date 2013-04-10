@@ -1,0 +1,4 @@
+<h2> 404!!
+
+<p> The page you are looking for <strong>[ <a href="#{path'}">#{path'}</a> ]</strong>
+    \ could not be found...

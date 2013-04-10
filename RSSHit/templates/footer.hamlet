@@ -1,0 +1,9 @@
+<footer>
+  <div class="snoop">
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <h3 class="footer-title">
+            ^{name}
+            -
+            RSS aggregation made simple

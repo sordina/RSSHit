@@ -1,0 +1,12 @@
+footer {
+  margin-top:   6em;
+  border-top:   1em solid #da6003;
+  border-right: 1em solid #da6003;
+
+  .snoop {
+    padding: 2em;
+    margin-top: 0.5em;
+    border-top:  1em solid #f2bc27;
+    border-left: 1em solid #f2bc27;
+  }
+}

@@ -1,7 +1,28 @@
 <div class="row">
   <div class="span6 offset3">
+    <h2 class="exfeeds"> My Feeds
+
+<div class="row">
+  <div class="span6 offset3 feedadder">
+    <div class="tagsinput-add fui-plus-16">
+    <input type="text" value="" placeholder="Inactive" class="span5">
+
+<div class="row">
+  <div class="span6 offset4">
+    <span class="fui-cross-24">
+    ^{rssitem}
+    ^{rssitem}
+    ^{rssitem}
+    ^{rssitem}
+
+<hr>
+
+<div class="row">
+  <div class="span6 offset3">
     <h2 class="exfeeds"> Example Feeds
 
+<div class="row">
+  <div class="span6 offset4">
     ^{rssitem}
     ^{rssitem}
     ^{rssitem}

@@ -24,22 +24,34 @@
   }
 
   .leftbox {
-    border: 0.15em solid red;
+    border: 0.15em solid #f2bc27;
     position: absolute;
     left: 0em;
     top: 0.2em;
-    width: 2.15em;
+    width: 2.2em;
     height: 1.3em;
     z-index: 1;
+    background: rgba(242, 188, 39, 0.5);
   }
 
   .rightbox {
-    border: 0.15em solid blue;
+    border: 0.15em solid #da6003;
     position: absolute;
-    left: 1.60em;
+    left: 1.58em;
     top: 0em;
     width: 2.8em;
     height: 1.3em;
     z-index: 2;
+    background: rgba(218, 96, 3, 0.5)
+  }
+
+  * {
+    color: white;
+  }
+
+  .shadow {
+    text-shadow: 0 0 0.1em #000000;
+    padding-left: 0.08em;
+    padding-right: 0.1em;
   }
 }

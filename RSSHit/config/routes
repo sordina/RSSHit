@@ -1,9 +1,12 @@
-/static      StaticR  Static  getStatic
-/auth        AuthR    Auth    getAuth
-/fay-command FaySiteR FaySite getFaySite
+/static      StaticR        Static  getStatic
+/auth        AuthR          Auth    getAuth
+/fay-command FaySiteR       FaySite getFaySite
 
-/favicon.ico FaviconR GET
-/robots.txt RobotsR GET
+/favicon.ico FaviconR       GET
+/robots.txt  RobotsR        GET
 
-/           HomeR GET POST
-/feed/#Text FeedR GET
+/            HomeR          GET POST
+/feed/#Text  FeedR          GET
+
+/login       PersonaLoginR  POST
+/logout      PersonaLogoutR POST

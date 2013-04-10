@@ -14,6 +14,7 @@ import           Settings.Development as Import
 import           Settings.StaticFiles as Import
 import           SharedTypes          as Import
 import           Snippets             as Import
+import           Data.Maybe           as Import
 
 #if __GLASGOW_HASKELL__ >= 704
 import           Data.Monoid          as Import
