@@ -34,13 +34,13 @@ import Data.Maybe (isNothing, isJust)
 -- starts running, such as database connections. Every handler will have
 -- access to the data present here.
 data App = App
-    { settings :: AppConfig DefaultEnv Extra
-    , getStatic :: Static -- ^ Settings for static file serving.
-    , connPool :: Database.Persist.Store.PersistConfigPool Settings.PersistConfig -- ^ Database connection pool.
-    , httpManager :: Manager
-    , persistConfig :: Settings.PersistConfig
+    { settings          :: AppConfig DefaultEnv Extra
+    , getStatic         :: Static -- ^ Settings for static file serving.
+    , connPool          :: Database.Persist.Store.PersistConfigPool Settings.PersistConfig -- ^ Database connection pool.
+    , httpManager       :: Manager
+    , persistConfig     :: Settings.PersistConfig
     , fayCommandHandler :: CommandHandler App App
-    , appLogger :: Logger
+    , appLogger         :: Logger
     }
 
 -- Set up i18n messages. See the message folder.
@@ -183,7 +183,7 @@ instance YesodAuth App where
     type AuthId App = UserId
 
     -- Where to send a user after successful login
-    loginDest _ = HomeR
+    loginDest  _ = HomeR
     -- Where to send a user after logout
     logoutDest _ = HomeR
 
@@ -207,10 +207,3 @@ instance RenderMessage App FormMessage where
 -- | Get the 'Extra' value, used to hold data from the settings.yml file.
 getExtra :: Handler Extra
 getExtra = fmap (appExtra . settings) getYesod
-
--- Note: previous versions of the scaffolding included a deliver function to
--- send emails. Unfortunately, there are too many different options for us to
--- give a reasonable default. Instead, the information is available on the
--- wiki:
---
--- https://github.com/yesodweb/yesod/wiki/Sending-email

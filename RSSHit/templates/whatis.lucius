@@ -5,6 +5,6 @@
   .meta {
     font-family: 'Clicker Script', cursive;
     font-size: 400%;
-    text-align: right;
+    text-align: center;
   }
 }

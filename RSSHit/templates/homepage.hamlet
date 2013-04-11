@@ -5,11 +5,10 @@
 <div class="row">
   <div class="span6 offset3 feedadder">
     <div class="tagsinput-add fui-plus-16">
-    <input type="text" value="" placeholder="Inactive" class="span5">
+    <input type="text" value="" placeholder="Add a feed URL here" class="span5">
 
 <div class="row">
   <div class="span6 offset4">
-    <span class="fui-cross-24">
     ^{rssitem}
     ^{rssitem}
     ^{rssitem}

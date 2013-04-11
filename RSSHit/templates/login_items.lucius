@@ -3,12 +3,11 @@
 
   h2 {
     padding: 0 0 1em 0;
-    margin-top: 0;
   }
 
   .login-form {
-    margin-left: 6em;
-    text-align: left;
+    margin-left: 7em;
+    text-align: center;
 
     input {
       width: 100%;

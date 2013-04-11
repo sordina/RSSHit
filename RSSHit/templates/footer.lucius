@@ -2,6 +2,7 @@ footer {
   margin-top:   6em;
   border-top:   1em solid #da6003;
   border-right: 1em solid #da6003;
+  background:   white;
 
   .snoop {
     padding: 2em;

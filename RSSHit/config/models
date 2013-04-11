@@ -1,17 +1,17 @@
 User
   ident      Text
-  password   Text Maybe
+  password   Text  Maybe
   UniqueUser ident
-  deriving Show
+  deriving   Show
 
 Email
   email       Text
   user        UserId Maybe
-  verkey      Text Maybe
+  verkey      Text   Maybe
   UniqueEmail email
-  deriving Show
+  deriving    Show
 
 Feed
-  url  Text
-  user UserId
+  url      Text
+  user     UserId
   deriving Show

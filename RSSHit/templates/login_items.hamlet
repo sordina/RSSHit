@@ -7,6 +7,6 @@
 
       <h2> Login to ^{name}
 
-      <a id="main_login_button" class="btn btn-primary btn-large btn-block" href="#">Login</a>
+      <a id="main_login_button" class="btn btn-primary btn-large btn-block" href="#">Login / Signup</a>
 
 <hr />
