@@ -16,7 +16,6 @@ small {
   display: block;
 }
 
-
 hr {
   margin: 3em 0;
 }
