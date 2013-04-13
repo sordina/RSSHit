@@ -23,11 +23,11 @@ import Web.ClientSession (getKey)
 import Text.Hamlet (hamletFile)
 import Yesod.Fay
 import System.Log.FastLogger (Logger)
-import Snippets
 import Data.Text
 import Network.Wai
 import Data.Monoid (mappend)
 import Data.Maybe (isNothing, isJust)
+import Snippets
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -65,6 +65,7 @@ mkMessage "App" "messages" "en"
 -- for our application to be in scope. However, the handler functions
 -- usually require access to the AppRoute datatype. Therefore, we
 -- split these actions into two functions and place them in separate files.
+
 mkYesodData "App" $(parseRoutesFile "config/routes")
 
 type Form x = Html -> MForm App App (FormResult x, Widget)
@@ -207,3 +208,4 @@ instance RenderMessage App FormMessage where
 -- | Get the 'Extra' value, used to hold data from the settings.yml file.
 getExtra :: Handler Extra
 getExtra = fmap (appExtra . settings) getYesod
+
